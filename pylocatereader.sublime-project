@@ -11,6 +11,12 @@
 	"folders":
 	[
 		{
+			"folder_exclude_patterns":
+			[
+				"dist",
+				"build",
+				"*.egg-info"
+			],
 			"follow_symlinks": true,
 			"path": "."
 		}
