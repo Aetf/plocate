@@ -13,7 +13,7 @@ PyLocateReader
         :target: https://pylocatereader.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/Aetf/pylocatereader/shield.svg
+.. image:: https://pyup.io/repos/github/aetf/pylocatereader/shield.svg
      :target: https://pyup.io/repos/github/Aetf/pylocatereader/
      :alt: Updates
 
