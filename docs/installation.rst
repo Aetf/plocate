@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/aetf/pylocatereader
+    $ git clone git://github.com/Aetf/pylocatereader
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/aetf/pylocatereader/tarball/master
+    $ curl  -OL https://github.com/Aetf/pylocatereader/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/aetf/pylocatereader
-.. _tarball: https://github.com/aetf/pylocatereader/tarball/master
+.. _Github repo: https://github.com/Aetf/pylocatereader
+.. _tarball: https://github.com/Aetf/pylocatereader/tarball/master

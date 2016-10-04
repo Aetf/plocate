@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+from pip.req import parse_requirements
+from pip.download import PipSession
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -9,14 +11,17 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [
-    'Click>=6.0',
-    # TODO: put package requirements here
-]
+parsed_requirements = parse_requirements(
+    'requirements/prod.txt',
+    session=PipSession()
+)
+requirements = [str(ir.req) for ir in parsed_requirements]
 
-test_requirements = [
-    # TODO: put package test requirements here
-]
+parsed_test_requirements = parse_requirements(
+    'requirements/test.txt',
+    session=PipSession()
+)
+test_requirements = [str(tr.req) for tr in parsed_test_requirements]
 
 setup(
     name='pylocatereader',
@@ -25,7 +30,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Aetf",
     author_email='aetf@unlimitedcodeworks.xyz',
-    url='https://github.com/aetf/pylocatereader',
+    url='https://github.com/Aetf/pylocatereader',
     packages=[
         'pylocatereader',
     ],
