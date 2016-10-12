@@ -23,6 +23,19 @@ you through the process.
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
 
+Alternate installation
+----------------------
+
+**Pipsi (Linux/OSX only):**
+
+.. code-block:: bash
+
+    $ pipsi install plocate
+
+If you don't know what `pipsi`_ is, go to its website to learn about this cool installer.
+
+.. _pipsi: https://github.com/mitsuhiko/pipsi
+
 From sources
 ------------
 
