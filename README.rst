@@ -14,7 +14,7 @@ plocate
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/aetf/plocate/shield.svg
-     :target: https://pyup.io/repos/github/Aetf/plocate/
+     :target: https://pyup.io/repos/github/aetf/plocate/
      :alt: Updates
 
 
