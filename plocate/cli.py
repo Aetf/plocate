@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 from . import plocate
 
@@ -36,13 +37,14 @@ import click
 @click.argument('patterns', metavar='PATTERNS', nargs=-1)
 def main(**kwargs):
     """Search for entries in a mlocate database."""
-    click.echo(kwargs)
     res = plocate.locate(**kwargs)
     if kwargs['count']:
         click.echo(res)
     else:
         sep = '\0' if kwargs['null'] else '\n'
-        click.echo(sep.join(res))
+        for entry in res:
+            click.echo(entry, nl=False)
+            click.echo(sep, nl=False)
 
 
 if __name__ == "__main__":

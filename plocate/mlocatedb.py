@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 import functools
 import struct
+import os
 
 from . import utils
 
@@ -44,21 +46,16 @@ class mlocatedb(object):
             return self.kind == 1
 
         def is_endmark(self):
-            return self.kind == 3
+            return self.kind == 2
 
         def is_file(self):
             return self.kind == 0
 
     def __init__(self, f, encoding='UTF-8'):
         super(mlocatedb, self).__init__()
-        self.header = parse_header(f, encoding)
-        self.config = parse_config(f, self.header.config_size, encoding)
-
-        self.files = []
-        dh = parse_dirheader(f, encoding)
-        while dh is not None:
-            fe = parse_fileentry(f, dh.dirpath, encoding)
-            self.files.append(fe)
+        self.reader = utils.dbfile_reader(f, encoding)
+        self.header = self.parse_header()
+        self.config = self.parse_config()
 
     def __str__(self):
         return ('<mlocatedb database, version {},'
@@ -66,49 +63,53 @@ class mlocatedb(object):
                                                           self.require_visibility,
                                                           self.dbroot))
 
+    def files(self):
+        dh = self.next_dirheader()
+        while dh is not None:
+            fe = self.next_fileentry(dh.dirpath)
+            if fe.is_endmark():
+                dh = self.next_dirheader()
+            else:
+                yield fe
 
-def parse_header(file, encoding):
-    """Parse a mlocate database"""
-    header = mlocatedb._dbheader(*utils.readnext(file, mlocatedb._dbheader._struct))
-    if not (header.magic == b'\0mlocate' and header.version < 1):
-        raise ValueError("The provided file is not in valid mlocate db format")
-    header.dbroot = utils.readcstr(file).decode(encoding)
-    return header
+    def parse_header(self):
+        """Parse a mlocate database header"""
+        header = self.reader.readnext(mlocatedb._dbheader)
+        if not (header.magic == b'\0mlocate' and header.version < 1):
+            raise ValueError("The provided file is not in valid mlocate db format")
+        header.dbroot, _ = self.reader.readcstr()
+        return header
+
+    def parse_config(self):
+        done = 0
+        config = {}
+        key = None
+        while done < self.header.config_size:
+            s, read = self.reader.readcstr()
+            done += read
+            if key is None:
+                key = s
+                config[key] = []
+            elif len(s) == 0:
+                # this key finished
+                key = None
+            else:
+                config[key].append(s)
+        return config
+
+    def next_dirheader(self):
+        """Try parse dirheader, return None on EOF"""
+        try:
+            dh = self.reader.readnext(mlocatedb._dirheader)
+            dh.dirpath, _ = self.reader.readcstr()
+        except EOFError as err:
+            return None
+        return dh
 
 
-def parse_config(file, size, encoding):
-    done = 0
-    config = {}
-    key = None
-    while done < size:
-        s = utils.readcstr(file)
-        # extra null byte is discarded, but should count
-        done += len(s) + 1
-        if key is None:
-            key = s.decode(encoding)
-            config[key] = []
-        elif len(s) == 0:
-            # this key finished
-            key = None
-        else:
-            value = s.decode(encoding)
-            config[key].append(value)
-    return config
-
-
-def parse_dirheader(file, encoding):
-    """Try parse dirheader, return None on EOF"""
-    try:
-        dh = mlocatedb._dirheader(*utils.readnext(file, mlocatedb._dirheader._struct))
-        dh.dirpath = utils.readcstr(file).decode(encoding)
-    except EOFError as err:
-        return None
-    return dh
-
-
-def parse_fileentry(file, parentpath, encoding):
-    """Parse file entry"""
-    fe = mlocatedb._fileentry(*utils.readnext(file, mlocatedb._fileentry._struct))
-    if fe.kind != 2:
-        fe.filename = parentpath + '/' + utils.readcstr(file).decode(encoding)
-    return fe
+    def next_fileentry(self, parentpath):
+        """Parse file entry"""
+        fe = self.reader.readnext(mlocatedb._fileentry)
+        if fe.kind != 2:
+            fe.filename = os.path.join(parentpath, self.reader.readcstr()[0])
+        return fe

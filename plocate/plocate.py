@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 from . import mlocatedb
 
@@ -8,8 +9,7 @@ import re
 
 
 def locate(patterns, database, **options):
-
-    flags = re.IGNORECASE if options['ignore-case'] else 0
+    flags = re.IGNORECASE if options['ignore_case'] else 0
     regs = [re.compile(pt, flags) for pt in patterns]
 
     def predict(fe):
@@ -40,6 +40,6 @@ def locate(patterns, database, **options):
                 return any(res)
 
     mdb = mlocatedb.mlocatedb(database)
-    reslist = itertools.islice((fe.filename for fe in mdb.files if predict(fe)),
-                               stop=options['limit'])
+    reslist = itertools.islice((fe.filename for fe in mdb.files() if predict(fe)),
+                               options['limit'])
     return reslist
