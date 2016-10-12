@@ -25,7 +25,7 @@ test_requirements = [str(tr.req) for tr in parsed_test_requirements]
 
 setup(
     name='plocate',
-    version='0.1.1',
+    version='0.1.2',
     description="Locate implementation with extra filtering features, compatible with mlocate.db format.",
     long_description=readme + '\n\n' + history,
     author="Aetf",
