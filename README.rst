@@ -28,7 +28,8 @@ Locate implementation with extra filtering features, compatible with mlocate.db 
 Features
 --------
 
-* TODO
+* Compatible with mlocate
+* Filtering with entry type (directory or file)
 
 Credits
 ---------
