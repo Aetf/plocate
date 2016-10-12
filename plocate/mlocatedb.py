@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, absolute_import, division, print_function
 
+from future.utils import native_str
 import functools
 import struct
 import os
@@ -13,7 +14,7 @@ class mlocatedb(object):
 
     class _dbheader(object):
         """database header"""
-        _struct = struct.Struct('>8sIB?2x')
+        _struct = struct.Struct(native_str('>8sIB?2x'))
 
         def __init__(self, magic, config_size, version, require_visibility, dbroot=None):
             super(mlocatedb._dbheader, self).__init__()
@@ -25,7 +26,7 @@ class mlocatedb(object):
 
     class _dirheader(object):
         """directory entry header"""
-        _struct = struct.Struct('>QI4x')
+        _struct = struct.Struct(native_str('>QI4x'))
 
         def __init__(self, time_sec, time_nano, dirpath=None):
             super(mlocatedb._dirheader, self).__init__()
@@ -35,7 +36,7 @@ class mlocatedb(object):
 
     class _fileentry(object):
         """file entry"""
-        _struct = struct.Struct('>B')
+        _struct = struct.Struct(native_str('>B'))
 
         def __init__(self, kind, filename=None):
             super(mlocatedb._fileentry, self).__init__()
