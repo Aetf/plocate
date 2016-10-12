@@ -34,17 +34,28 @@ from . import plocate
               help='match whole path name (default)')
 @click.option('--null', '-0', is_flag=True, default=False,
               help='separate entries with NUL on output')
-@click.argument('patterns', metavar='PATTERNS', nargs=-1)
-def main(**kwargs):
+@click.option('--profiling', metavar='FILENAME', type=click.Path(),
+              help='run in profiling mode, output stats to FILENAME')
+@click.argument('patterns', metavar='PATTERNS', nargs=-1, required=True)
+def main(profiling, **kwargs):
     """Search for entries in a mlocate database."""
-    res = plocate.locate(**kwargs)
-    if kwargs['count']:
-        click.echo(res)
+    click.echo(kwargs['patterns'])
+
+    def work(kwargs):
+        res = plocate.locate(**kwargs)
+        if kwargs['count']:
+            click.echo(res)
+        else:
+            sep = '\0' if kwargs['null'] else '\n'
+            for entry in res:
+                click.echo(entry, nl=False)
+                click.echo(sep, nl=False)
+
+    if profiling is not None:
+        import cProfile
+        cProfile.runctx('work(kwargs)', globals(), locals(), filename=profiling)
     else:
-        sep = '\0' if kwargs['null'] else '\n'
-        for entry in res:
-            click.echo(entry, nl=False)
-            click.echo(sep, nl=False)
+        work(kwargs)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ from __future__ import unicode_literals, absolute_import, division, print_functi
 
 from future.utils import native_str
 import struct
-import os
 
 from . import utils
 
@@ -65,6 +64,9 @@ class mlocatedb(object):
 
     def files(self):
         dh = self.next_dirheader()
+        if dh.dirpath == '/':
+            # the only case where we have a trailing '/' in dirpath
+            dh.dirpath = ''
         while dh is not None:
             fe = self.next_fileentry(dh.dirpath)
             if fe.is_endmark():
@@ -110,5 +112,5 @@ class mlocatedb(object):
         """Parse file entry"""
         fe = self.reader.readnext(mlocatedb._fileentry)
         if fe.kind != 2:
-            fe.filename = os.path.join(parentpath, self.reader.readcstr()[0])
+            fe.filename = parentpath + '/' + self.reader.readcstr()[0]
         return fe

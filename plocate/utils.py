@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, absolute_import, division, print_function
 
-import itertools
+import os
+import mmap
 
 
 class dbfile_reader(object):
     """binary file reader"""
+
     def __init__(self, file, encoding):
         super(dbfile_reader, self).__init__()
-        self.f = file
+        self.f = mmap.mmap(file.fileno(), length=0, access=mmap.ACCESS_READ)
         self.encoding = encoding
 
     def readcstr(self):
@@ -20,29 +22,20 @@ class dbfile_reader(object):
 
     def readbytestr(self):
         """Read a null-terminated byte string from file"""
-        def toeof():
-            byte = self.f.read(1)
-            while len(byte) > 0:
-                yield byte
-                byte = self.f.read(1)
+        start = self.f.tell()
+        idx = self.f.find(b'\0', start)
+        if idx == -1:
             raise EOFError
-
-        return b''.join(itertools.takewhile(b'\0'.__ne__, toeof()))
-
-    def readuntil(self, count=-1):
-        """Read the file until got enough bytes, or eof"""
-        def toend():
-            remain = count
-            byte = self.f.read(1)
-            while len(byte) > 0:
-                yield byte
-                remain -= len(byte)
-                byte = self.f.read(remain)
-            if remain > 0:
-                raise EOFError('File ended before get enough bytes, {} remaining'.format(remain))
-        return b''.join(toend())
+        self.f.seek(idx + 1)
+        return self.f[start:idx]
 
     def readnext(self, clz):
         """Read and parse next struct from file"""
         fmt = clz._struct
-        return clz(*fmt.unpack(self.readuntil(fmt.size)))
+        try:
+            start = self.f.tell()
+            self.f.seek(fmt.size, os.SEEK_CUR)
+            return clz(*fmt.unpack(self.f[start:start + fmt.size]))
+        except ValueError as err:
+            remain = fmt.size - (self.f.size() - self.f.tell())
+            raise EOFError('File ended before get enough bytes, {} remaining'.format(remain))
