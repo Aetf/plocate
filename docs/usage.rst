@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use PyLocateReader in a project::
+To use plocate in a project::
 
-    import pylocatereader
+    import plocate

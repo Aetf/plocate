@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_pylocatereader
+test_plocate
 ----------------------------------
 
-Tests for `pylocatereader` module.
+Tests for `plocate` module.
 """
 
 
@@ -14,12 +14,12 @@ import unittest
 from contextlib import contextmanager
 from click.testing import CliRunner
 
-from pylocatereader import pylocatereader
-from pylocatereader import cli
+from plocate import plocate
+from plocate import cli
 
 
 
-class TestPylocatereader(unittest.TestCase):
+class Testplocate(unittest.TestCase):
 
     def setUp(self):
         pass
@@ -34,7 +34,7 @@ class TestPylocatereader(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'pylocatereader.cli.main' in result.output
+        assert 'plocate.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output

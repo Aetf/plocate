@@ -1,20 +1,20 @@
 ===============================
-PyLocateReader
+plocate
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/pylocatereader.svg
-        :target: https://pypi.python.org/pypi/pylocatereader
+.. image:: https://img.shields.io/pypi/v/plocate.svg
+        :target: https://pypi.python.org/pypi/plocate
 
-.. image:: https://img.shields.io/travis/Aetf/pylocatereader.svg
-        :target: https://travis-ci.org/Aetf/pylocatereader
+.. image:: https://img.shields.io/travis/Aetf/plocate.svg
+        :target: https://travis-ci.org/Aetf/plocate
 
-.. image:: https://readthedocs.org/projects/pylocatereader/badge/?version=latest
-        :target: https://pylocatereader.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/plocate/badge/?version=latest
+        :target: https://plocate.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/aetf/pylocatereader/shield.svg
-     :target: https://pyup.io/repos/github/Aetf/pylocatereader/
+.. image:: https://pyup.io/repos/github/aetf/plocate/shield.svg
+     :target: https://pyup.io/repos/github/Aetf/plocate/
      :alt: Updates
 
 
@@ -22,7 +22,7 @@ Locate implementation with extra filtering features, compatible with mlocate.db 
 
 
 * Free software: BSD license
-* Documentation: https://pylocatereader.readthedocs.io.
+* Documentation: https://plocate.readthedocs.io.
 
 
 Features

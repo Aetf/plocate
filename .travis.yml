@@ -19,7 +19,7 @@ deploy:
   user: Aetf
   true:
     condition: $TOXENV == py27
-    repo: Aetf/pylocatereader
+    repo: Aetf/plocate
     tags: true
 env:
 - TOXENV=py35

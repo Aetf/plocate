@@ -5,7 +5,7 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"/home/aetf/.local/venvs/pylocatereader/bin/python\" -u \"$file\""
+			"shell_cmd": "\"/home/aetf/.local/venvs/plocate-dev/bin/python\" -u \"$file\""
 		}
 	],
 	"folders":
@@ -15,7 +15,8 @@
 			[
 				"dist",
 				"build",
-				"*.egg-info"
+				"*.egg-info",
+				"__pycache__"
 			],
 			"follow_symlinks": true,
 			"path": "."
@@ -23,6 +24,6 @@
 	],
 	"settings":
 	{
-		"python_interpreter": "/home/aetf/.local/venvs/pylocatereader-dev/bin/python"
+		"python_interpreter": "/home/aetf/.local/venvs/plocate-dev/bin/python"
 	}
 }

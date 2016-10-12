@@ -1,4 +1,4 @@
-* PyLocateReader version:
+* plocate version:
 * Python version:
 * Operating System:
 

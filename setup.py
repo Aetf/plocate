@@ -24,28 +24,28 @@ parsed_test_requirements = parse_requirements(
 test_requirements = [str(tr.req) for tr in parsed_test_requirements]
 
 setup(
-    name='pylocatereader',
+    name='plocate',
     version='0.1.0',
     description="Locate implementation with extra filtering features, compatible with mlocate.db format.",
     long_description=readme + '\n\n' + history,
     author="Aetf",
     author_email='aetf@unlimitedcodeworks.xyz',
-    url='https://github.com/Aetf/pylocatereader',
+    url='https://github.com/Aetf/plocate',
     packages=[
-        'pylocatereader',
+        'plocate',
     ],
-    package_dir={'pylocatereader':
-                 'pylocatereader'},
+    package_dir={'plocate':
+                 'plocate'},
     entry_points={
         'console_scripts': [
-            'pylocatereader=pylocatereader.cli:main'
+            'plocate=plocate.cli:main'
         ]
     },
     include_package_data=True,
     install_requires=requirements,
     license="BSD license",
     zip_safe=False,
-    keywords='pylocatereader',
+    keywords='plocate',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

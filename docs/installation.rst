@@ -8,13 +8,13 @@ Installation
 Stable release
 --------------
 
-To install PyLocateReader, run this command in your terminal:
+To install plocate, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install pylocatereader
+    $ pip install plocate
 
-This is the preferred method to install PyLocateReader, as it will always install the most recent stable release. 
+This is the preferred method to install plocate, as it will always install the most recent stable release. 
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -26,19 +26,19 @@ you through the process.
 From sources
 ------------
 
-The sources for PyLocateReader can be downloaded from the `Github repo`_.
+The sources for plocate can be downloaded from the `Github repo`_.
 
 You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/Aetf/pylocatereader
+    $ git clone git://github.com/Aetf/plocate
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/Aetf/pylocatereader/tarball/master
+    $ curl  -OL https://github.com/Aetf/plocate/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/Aetf/pylocatereader
-.. _tarball: https://github.com/Aetf/pylocatereader/tarball/master
+.. _Github repo: https://github.com/Aetf/plocate
+.. _tarball: https://github.com/Aetf/plocate/tarball/master
