@@ -19,7 +19,6 @@ from plocate import plocate
 from plocate import cli
 
 
-
 class Testplocate(unittest.TestCase):
 
     def setUp(self):

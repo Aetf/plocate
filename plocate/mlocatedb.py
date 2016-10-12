@@ -2,7 +2,6 @@
 from __future__ import unicode_literals, absolute_import, division, print_function
 
 from future.utils import native_str
-import functools
 import struct
 import os
 
@@ -106,7 +105,6 @@ class mlocatedb(object):
         except EOFError as err:
             return None
         return dh
-
 
     def next_fileentry(self, parentpath):
         """Parse file entry"""

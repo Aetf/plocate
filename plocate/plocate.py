@@ -7,6 +7,7 @@ import re
 
 from . import mlocatedb
 
+
 def locate(patterns, database, **options):
     flags = re.IGNORECASE if options['ignore_case'] else 0
     regs = [re.compile(pt, flags) for pt in patterns]
