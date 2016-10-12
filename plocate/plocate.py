@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from . import mlocatedb
-
 import itertools
 import os
 import re
 
+from . import mlocatedb
 
 def locate(patterns, database, **options):
     flags = re.IGNORECASE if options['ignore_case'] else 0

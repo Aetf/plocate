@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from . import plocate
-
 import click
+
+from . import plocate
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
