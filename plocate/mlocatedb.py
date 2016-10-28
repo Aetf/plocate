@@ -103,7 +103,7 @@ class mlocatedb(object):
         """Try parse dirheader, return None on EOF"""
         try:
             dh = self.reader.readnext(mlocatedb._dirheader)
-            dh.dirpath, _ = self.reader.readcstr()
+            dh.dirpath = self.reader.readcstr()[0] + '/'
         except EOFError as err:
             return None
         return dh
@@ -112,5 +112,5 @@ class mlocatedb(object):
         """Parse file entry"""
         fe = self.reader.readnext(mlocatedb._fileentry)
         if fe.kind != 2:
-            fe.filename = parentpath + '/' + self.reader.readcstr()[0]
+            fe.filename = ''.join([parentpath, self.reader.readcstr()[0]])
         return fe
