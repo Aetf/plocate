@@ -31,6 +31,14 @@ Features
 * Compatible with mlocate
 * Filtering with entry type (directory or file)
 
+
+TODO
+----
+
+* Handle signal for cancelation
+* Produce output as soon as possible
+* Don't convert the whole database in python objects, just read and skip
+
 Credits
 ---------
 

@@ -21,14 +21,10 @@ deploy:
     condition: $TOXENV == py27
     repo: Aetf/plocate
     tags: true
-env:
-- TOXENV=py35
-- TOXENV=py34
-- TOXENV=py33
-- TOXENV=py27
-- TOXENV=py26
-- TOXENV=pypy
-install: pip install -U tox
 language: python
-python: 3.5
-script: tox -e ${TOXENV}
+python:
+    - 3.5
+    - 2.7
+    - "pypy"
+install: pip install -U tox-travis
+script: tox
