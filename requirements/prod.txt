@@ -1,2 +1,2 @@
 Click==6.6
-future==0.16.0
+future==0.18.2
